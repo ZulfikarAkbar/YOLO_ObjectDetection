@@ -1,0 +1,26 @@
+<annotation>
+	<folder>caterpillar</folder>
+	<filename>37.png</filename>
+	<path>D:\venv\caterpillar\37.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>384</width>
+		<height>255</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Pest! (nettle_caterpillar)</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>33</xmin>
+			<ymin>48</ymin>
+			<xmax>326</xmax>
+			<ymax>217</ymax>
+		</bndbox>
+	</object>
+</annotation>

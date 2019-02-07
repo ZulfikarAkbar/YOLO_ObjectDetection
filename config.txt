@@ -1,0 +1,462 @@
+User manual:
+1. Connect Raspberry pi & inference computer to same wifi access without wifi password
+2. Open your PUTTY SSH Client on inference computer and input your raspberry pi ip address
+3. input pi username & password
+4. open your directory which are saved python codes to open access server & raspberry pi camera
+	$ cd PICAM
+5. input your python virtual environtment
+	$ source .venv/bin/activate
+6. access your main directory
+	$ cd camserver
+7. run main program
+	$ python app.py
+8. open inference computer browser and input raspberry pi ip address
+	- i.e: 192.168.43.98:5000/image.jpg
+	- 5000 is default flask port, but you can change to 8080 which it has been added with little parameters on app.py code
+	- like 192.168.43.98:8080/image.jpg
+	- /image.jpg is the way to check raspberry pi open server
+	- you can check this on your gadget too.
+9. on your inference computer, open command prompt and input:
+	- cd venv
+	- path\to\virtualenv\project\Scripts\activate (this is to activate python virtual environtment)
+	- cd d
+	- python predict.py
+	- python predict_draw.py
+
+
+
+1. path\to\virtualenv\project\Scripts\activate
+
+(project) D:\venv\d>python flow --model cfg/tiny-yolo-voc-1c.cfg --load bin/tiny-yolo-voc.weights
+
+Parsing ./cfg/tiny-yolo-voc.cfg
+Parsing cfg/tiny-yolo-voc-1c.cfg
+Loading bin/tiny-yolo-voc.weights ...
+Successfully identified 63471556 bytes
+Finished in 0.06100344657897949s
+
+Building net ...
+Source | Train? | Layer description                | Output size
+-------+--------+----------------------------------+---------------
+       |        | input                            | (?, 416, 416, 3)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 416, 416, 16)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 208, 208, 16)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 208, 208, 32)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 104, 104, 32)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 104, 104, 64)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 52, 52, 64)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 52, 52, 128)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 26, 26, 128)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 26, 26, 256)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 13, 13, 256)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 512)
+ Load  |  Yep!  | maxp 2x2p0_1                     | (?, 13, 13, 512)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 1024)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 1024)
+ Init  |  Yep!  | conv 1x1p0_1    linear           | (?, 13, 13, 30)
+-------+--------+----------------------------------+---------------
+Running entirely on CPU
+Finished in 39.493269205093384s
+
+Forwarding 1 inputs ...
+Total time = 4.653058052062988s / 1 inps = 0.21491242722764617 ips
+Post processing 1 inputs ...
+Total time = 1.0970308780670166s / 1 inps = 0.9115513701510514 ips
+
+(project) D:\venv\d>python flow --imgdir sample_img/ --model cfg/tiny-yolo-voc-1c.cfg --load bin/tiny-yolo-voc.weights --gpu 1.0
+
+Parsing ./cfg/tiny-yolo-voc.cfg
+Parsing cfg/tiny-yolo-voc-1c.cfg
+Loading bin/tiny-yolo-voc.weights ...
+Successfully identified 63471556 bytes
+Finished in 0.023000717163085938s
+
+Building net ...
+Source | Train? | Layer description                | Output size
+-------+--------+----------------------------------+---------------
+       |        | input                            | (?, 416, 416, 3)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 416, 416, 16)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 208, 208, 16)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 208, 208, 32)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 104, 104, 32)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 104, 104, 64)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 52, 52, 64)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 52, 52, 128)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 26, 26, 128)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 26, 26, 256)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 13, 13, 256)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 512)
+ Load  |  Yep!  | maxp 2x2p0_1                     | (?, 13, 13, 512)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 1024)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 1024)
+ Init  |  Yep!  | conv 1x1p0_1    linear           | (?, 13, 13, 30)
+-------+--------+----------------------------------+---------------
+GPU mode with 1.0 usage
+Finished in 15.617522954940796s
+
+Forwarding 1 inputs ...
+Total time = 2.339066743850708s / 1 inps = 0.42752093441922984 ips
+Post processing 1 inputs ...
+Total time = 0.6400368213653564s / 1 inps = 1.5624101092602036 ips
+
+(project) D:\venv\d>python flow --model cfg/tiny-yolo-voc-1c.cfg --load bin/tiny-yolo-voc.weights --train --annotation train/Annotations --dataset train/Images --gpu 1.0 --epoch 100
+
+Parsing ./cfg/tiny-yolo-voc.cfg
+Parsing cfg/tiny-yolo-voc-1c.cfg
+Loading bin/tiny-yolo-voc.weights ...
+Successfully identified 63471556 bytes
+Finished in 0.015599966049194336s
+
+Building net ...
+Source | Train? | Layer description                | Output size
+-------+--------+----------------------------------+---------------
+       |        | input                            | (?, 416, 416, 3)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 416, 416, 16)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 208, 208, 16)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 208, 208, 32)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 104, 104, 32)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 104, 104, 64)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 52, 52, 64)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 52, 52, 128)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 26, 26, 128)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 26, 26, 256)
+ Load  |  Yep!  | maxp 2x2p0_2                     | (?, 13, 13, 256)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 512)
+ Load  |  Yep!  | maxp 2x2p0_1                     | (?, 13, 13, 512)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 1024)
+ Load  |  Yep!  | conv 3x3p1_1  +bnorm  leaky      | (?, 13, 13, 1024)
+ Init  |  Yep!  | conv 1x1p0_1    linear           | (?, 13, 13, 30)
+-------+--------+----------------------------------+---------------
+GPU mode with 1.0 usage
+cfg/tiny-yolo-voc-1c.cfg loss hyper-parameters:
+        H       = 13
+        W       = 13
+        box     = 5
+        classes = 1
+        scales  = [1.0, 5.0, 1.0, 1.0]
+Building cfg/tiny-yolo-voc-1c.cfg loss
+Building cfg/tiny-yolo-voc-1c.cfg train op
+Finished in 11.5984206199646s
+
+Enter training ...
+
+cfg/tiny-yolo-voc-1c.cfg parsing train/Annotations
+Parsing for ['Pest! (nettle_caterpillar)']
+[====================>]100%  9.xml
+Statistics:
+Pest! (nettle_caterpillar): 45
+Dataset size: 45
+Dataset of 45 instance(s)
+Training statistics:
+        Learning rate : 1e-05
+        Batch size    : 16
+        Epoch number  : 100
+        Backup every  : 2000
+2018-11-01 12:59:01.303354: W T:\src\github\tensorflow\tensorflow\core\framework\allocator.cc:108] Allocation of 177209344 exceeds 10% of system memory.
+2018-11-01 12:59:04.537025: W T:\src\github\tensorflow\tensorflow\core\framework\allocator.cc:108] Allocation of 177209344 exceeds 10% of system memory.
+2018-11-01 12:59:05.286241: W T:\src\github\tensorflow\tensorflow\core\framework\allocator.cc:108] Allocation of 177209344 exceeds 10% of system memory.
+2018-11-01 12:59:10.603915: W T:\src\github\tensorflow\tensorflow\core\framework\allocator.cc:108] Allocation of 177209344 exceeds 10% of system memory.
+2018-11-01 12:59:10.952327: W T:\src\github\tensorflow\tensorflow\core\framework\allocator.cc:108] Allocation of 177209344 exceeds 10% of system memory.
+step 1 - loss 112.41767883300781 - moving ave loss 112.41767883300781
+step 2 - loss 111.27751159667969 - moving ave loss 112.303662109375
+Finish 1 epoch(es)
+step 3 - loss 110.52195739746094 - moving ave loss 112.12549163818359
+step 4 - loss 109.57715606689453 - moving ave loss 111.8706580810547
+Finish 2 epoch(es)
+step 5 - loss 109.08563232421875 - moving ave loss 111.5921555053711
+step 6 - loss 108.34794616699219 - moving ave loss 111.2677345715332
+Finish 3 epoch(es)
+step 7 - loss 107.94953918457031 - moving ave loss 110.9359150328369
+step 8 - loss 107.14674377441406 - moving ave loss 110.55699790699462
+Finish 4 epoch(es)
+step 9 - loss 106.83822631835938 - moving ave loss 110.1851207481311
+step 10 - loss 106.25648498535156 - moving ave loss 109.79225717185315
+Finish 5 epoch(es)
+step 11 - loss 105.86849975585938 - moving ave loss 109.39988143025377
+step 12 - loss 105.3593521118164 - moving ave loss 108.99582849841003
+Finish 6 epoch(es)
+step 13 - loss 104.96621704101562 - moving ave loss 108.5928673526706
+step 14 - loss 104.26130676269531 - moving ave loss 108.15971129367307
+Finish 7 epoch(es)
+step 15 - loss 104.10392761230469 - moving ave loss 107.75413292553624
+step 16 - loss 103.62713623046875 - moving ave loss 107.34143325602949
+Finish 8 epoch(es)
+step 17 - loss 103.21726989746094 - moving ave loss 106.92901692017264
+step 18 - loss 102.79573059082031 - moving ave loss 106.51568828723742
+Finish 9 epoch(es)
+step 19 - loss 102.41141510009766 - moving ave loss 106.10526096852345
+step 20 - loss 101.90696716308594 - moving ave loss 105.6854315879797
+Finish 10 epoch(es)
+step 21 - loss 101.39337921142578 - moving ave loss 105.25622635032433
+step 22 - loss 101.1479721069336 - moving ave loss 104.84540092598525
+Finish 11 epoch(es)
+step 23 - loss 100.76182556152344 - moving ave loss 104.43704338953907
+step 24 - loss 100.2492446899414 - moving ave loss 104.0182635195793
+Finish 12 epoch(es)
+step 25 - loss 99.91380310058594 - moving ave loss 103.60781747767999
+step 26 - loss 99.6297607421875 - moving ave loss 103.21001180413074
+Finish 13 epoch(es)
+step 27 - loss 99.05976867675781 - moving ave loss 102.79498749139344
+step 28 - loss 98.71719360351562 - moving ave loss 102.38720810260567
+Finish 14 epoch(es)
+step 29 - loss 98.3485107421875 - moving ave loss 101.98333836656386
+step 30 - loss 97.87891387939453 - moving ave loss 101.57289591784692
+Finish 15 epoch(es)
+step 31 - loss 97.51488494873047 - moving ave loss 101.16709482093528
+step 32 - loss 97.26461029052734 - moving ave loss 100.77684636789448
+Finish 16 epoch(es)
+step 33 - loss 96.78341674804688 - moving ave loss 100.37750340590972
+step 34 - loss 96.5060043334961 - moving ave loss 99.99035349866836
+Finish 17 epoch(es)
+step 35 - loss 96.04132843017578 - moving ave loss 99.5954509918191
+step 36 - loss 95.67039489746094 - moving ave loss 99.20294538238329
+Finish 18 epoch(es)
+step 37 - loss 95.41828918457031 - moving ave loss 98.824479762602
+step 38 - loss 94.94043731689453 - moving ave loss 98.43607551803126
+Finish 19 epoch(es)
+step 39 - loss 94.5530014038086 - moving ave loss 98.047768106609
+step 40 - loss 94.03495788574219 - moving ave loss 97.64648708452232
+Finish 20 epoch(es)
+step 41 - loss 93.91819763183594 - moving ave loss 97.27365813925368
+step 42 - loss 93.3675537109375 - moving ave loss 96.88304769642207
+Finish 21 epoch(es)
+step 43 - loss 93.14501953125 - moving ave loss 96.50924487990487
+step 44 - loss 92.654052734375 - moving ave loss 96.12372566535188
+Finish 22 epoch(es)
+step 45 - loss 92.29045104980469 - moving ave loss 95.74039820379717
+step 46 - loss 92.0281982421875 - moving ave loss 95.36917820763621
+Finish 23 epoch(es)
+step 47 - loss 91.70173645019531 - moving ave loss 95.00243403189212
+step 48 - loss 91.24752807617188 - moving ave loss 94.62694343632009
+Finish 24 epoch(es)
+step 49 - loss 90.82953643798828 - moving ave loss 94.24720273648691
+step 50 - loss 90.57817077636719 - moving ave loss 93.88029954047494
+Finish 25 epoch(es)
+step 51 - loss 90.114990234375 - moving ave loss 93.50376860986493
+step 52 - loss 89.84794616699219 - moving ave loss 93.13818636557767
+Finish 26 epoch(es)
+step 53 - loss 89.45455932617188 - moving ave loss 92.76982366163709
+step 54 - loss 88.99188232421875 - moving ave loss 92.39202952789526
+Finish 27 epoch(es)
+step 55 - loss 88.58177185058594 - moving ave loss 92.01100376016433
+step 56 - loss 88.31556701660156 - moving ave loss 91.64146008580806
+Finish 28 epoch(es)
+step 57 - loss 87.84913635253906 - moving ave loss 91.26222771248116
+step 58 - loss 87.60845947265625 - moving ave loss 90.89685088849868
+Finish 29 epoch(es)
+step 59 - loss 87.15758514404297 - moving ave loss 90.52292431405311
+step 60 - loss 86.82861328125 - moving ave loss 90.15349321077281
+Finish 30 epoch(es)
+step 61 - loss 86.38448333740234 - moving ave loss 89.77659222343576
+step 62 - loss 86.15188598632812 - moving ave loss 89.414121599725
+Finish 31 epoch(es)
+step 63 - loss 85.73944091796875 - moving ave loss 89.04665353154937
+step 64 - loss 85.40069580078125 - moving ave loss 88.68205775847255
+Finish 32 epoch(es)
+step 65 - loss 85.08261108398438 - moving ave loss 88.32211309102374
+step 66 - loss 84.74230194091797 - moving ave loss 87.96413197601316
+Finish 33 epoch(es)
+step 67 - loss 84.29830932617188 - moving ave loss 87.59754971102905
+step 68 - loss 83.94754791259766 - moving ave loss 87.23254953118591
+Finish 34 epoch(es)
+step 69 - loss 83.63983154296875 - moving ave loss 86.8732777323642
+step 70 - loss 83.22314453125 - moving ave loss 86.50826441225279
+Finish 35 epoch(es)
+step 71 - loss 82.76280975341797 - moving ave loss 86.1337189463693
+step 72 - loss 82.47541046142578 - moving ave loss 85.76788809787494
+Finish 36 epoch(es)
+step 73 - loss 82.10482788085938 - moving ave loss 85.4015820761734
+step 74 - loss 81.84528350830078 - moving ave loss 85.04595221938614
+Finish 37 epoch(es)
+step 75 - loss 81.40870666503906 - moving ave loss 84.68222766395142
+step 76 - loss 80.920654296875 - moving ave loss 84.30607032724377
+Finish 38 epoch(es)
+step 77 - loss 80.49650573730469 - moving ave loss 83.92511386824987
+step 78 - loss 80.34656524658203 - moving ave loss 83.56725900608309
+Finish 39 epoch(es)
+step 79 - loss 79.97281646728516 - moving ave loss 83.20781475220329
+step 80 - loss 79.7147445678711 - moving ave loss 82.85850773377007
+Finish 40 epoch(es)
+step 81 - loss 79.1592025756836 - moving ave loss 82.48857721796142
+step 82 - loss 78.73684692382812 - moving ave loss 82.11340418854809
+Finish 41 epoch(es)
+step 83 - loss 78.50592803955078 - moving ave loss 81.75265657364837
+step 84 - loss 78.09403991699219 - moving ave loss 81.38679490798275
+Finish 42 epoch(es)
+step 85 - loss 77.75326538085938 - moving ave loss 81.02344195527041
+step 86 - loss 77.17134094238281 - moving ave loss 80.63823185398165
+Finish 43 epoch(es)
+step 87 - loss 77.14505004882812 - moving ave loss 80.2889136734663
+step 88 - loss 76.6009292602539 - moving ave loss 79.92011523214505
+Finish 44 epoch(es)
+step 89 - loss 76.38475036621094 - moving ave loss 79.56657874555164
+step 90 - loss 75.88523864746094 - moving ave loss 79.19844473574257
+Finish 45 epoch(es)
+step 91 - loss 75.45111846923828 - moving ave loss 78.82371210909214
+step 92 - loss 75.14698028564453 - moving ave loss 78.45603892674738
+Finish 46 epoch(es)
+step 93 - loss 74.76809692382812 - moving ave loss 78.08724472645547
+step 94 - loss 74.47109985351562 - moving ave loss 77.72563023916148
+Finish 47 epoch(es)
+step 95 - loss 74.18882751464844 - moving ave loss 77.37194996671018
+step 96 - loss 73.94821166992188 - moving ave loss 77.02957613703134
+Finish 48 epoch(es)
+step 97 - loss 73.29344177246094 - moving ave loss 76.6559627005743
+step 98 - loss 73.20610046386719 - moving ave loss 76.31097647690359
+Finish 49 epoch(es)
+step 99 - loss 72.60675048828125 - moving ave loss 75.94055387804136
+step 100 - loss 72.42372131347656 - moving ave loss 75.58887062158487
+Finish 50 epoch(es)
+step 101 - loss 71.96253204345703 - moving ave loss 75.22623676377209
+step 102 - loss 71.70350646972656 - moving ave loss 74.87396373436754
+Finish 51 epoch(es)
+step 103 - loss 71.21829986572266 - moving ave loss 74.50839734750305
+step 104 - loss 70.91763305664062 - moving ave loss 74.1493209184168
+Finish 52 epoch(es)
+step 105 - loss 70.42984008789062 - moving ave loss 73.77737283536419
+step 106 - loss 70.23448181152344 - moving ave loss 73.42308373298012
+Finish 53 epoch(es)
+step 107 - loss 69.65769958496094 - moving ave loss 73.0465453181782
+step 108 - loss 69.57119750976562 - moving ave loss 72.69901053733695
+Finish 54 epoch(es)
+step 109 - loss 69.0481948852539 - moving ave loss 72.33392897212865
+step 110 - loss 68.81945037841797 - moving ave loss 71.98248111275758
+Finish 55 epoch(es)
+step 111 - loss 68.34635925292969 - moving ave loss 71.6188689267748
+step 112 - loss 67.8629150390625 - moving ave loss 71.24327353800358
+Finish 56 epoch(es)
+step 113 - loss 67.62210845947266 - moving ave loss 70.88115703015049
+step 114 - loss 67.4893569946289 - moving ave loss 70.54197702659833
+Finish 57 epoch(es)
+step 115 - loss 66.80703735351562 - moving ave loss 70.16848305929005
+step 116 - loss 66.75996398925781 - moving ave loss 69.82763115228683
+Finish 58 epoch(es)
+step 117 - loss 66.25347900390625 - moving ave loss 69.47021593744877
+step 118 - loss 65.92407989501953 - moving ave loss 69.11560233320584
+Finish 59 epoch(es)
+step 119 - loss 65.67984771728516 - moving ave loss 68.77202687161378
+step 120 - loss 65.23155212402344 - moving ave loss 68.41797939685475
+Finish 60 epoch(es)
+step 121 - loss 64.78401184082031 - moving ave loss 68.0545826412513
+step 122 - loss 64.53665161132812 - moving ave loss 67.70278953825898
+Finish 61 epoch(es)
+step 123 - loss 64.13230895996094 - moving ave loss 67.34574148042918
+step 124 - loss 64.15771484375 - moving ave loss 67.02693881676126
+Finish 62 epoch(es)
+step 125 - loss 63.38294219970703 - moving ave loss 66.66253915505584
+Checkpoint at step 125
+step 126 - loss 63.270530700683594 - moving ave loss 66.3233383096186
+Finish 63 epoch(es)
+step 127 - loss 62.65349578857422 - moving ave loss 65.95635405751416
+step 128 - loss 62.656982421875 - moving ave loss 65.62641689395025
+Finish 64 epoch(es)
+step 129 - loss 62.033180236816406 - moving ave loss 65.26709322823687
+step 130 - loss 61.98326873779297 - moving ave loss 64.93871077919249
+Finish 65 epoch(es)
+step 131 - loss 61.246742248535156 - moving ave loss 64.56951392612676
+step 132 - loss 61.18537902832031 - moving ave loss 64.23110043634611
+Finish 66 epoch(es)
+step 133 - loss 60.73566436767578 - moving ave loss 63.88155682947908
+step 134 - loss 60.68251419067383 - moving ave loss 63.561652565598564
+Finish 67 epoch(es)
+step 135 - loss 60.23712921142578 - moving ave loss 63.22920023018129
+step 136 - loss 60.13913345336914 - moving ave loss 62.92019355250008
+Finish 68 epoch(es)
+step 137 - loss 59.43330764770508 - moving ave loss 62.57150496202058
+step 138 - loss 59.31365966796875 - moving ave loss 62.2457204326154
+Finish 69 epoch(es)
+step 139 - loss 58.82857894897461 - moving ave loss 61.904006284251324
+step 140 - loss 58.93609619140625 - moving ave loss 61.60721527496682
+Finish 70 epoch(es)
+step 141 - loss 58.139957427978516 - moving ave loss 61.260489490267986
+step 142 - loss 58.188987731933594 - moving ave loss 60.95333931443455
+Finish 71 epoch(es)
+step 143 - loss 57.423622131347656 - moving ave loss 60.600367596125864
+step 144 - loss 57.298011779785156 - moving ave loss 60.27013201449179
+Finish 72 epoch(es)
+step 145 - loss 57.08356475830078 - moving ave loss 59.95147528887269
+step 146 - loss 56.51813507080078 - moving ave loss 59.608141267065506
+Finish 73 epoch(es)
+step 147 - loss 56.30845642089844 - moving ave loss 59.2781727824488
+step 148 - loss 55.727664947509766 - moving ave loss 58.9231219989549
+Finish 74 epoch(es)
+step 149 - loss 55.40043640136719 - moving ave loss 58.57085343919613
+step 150 - loss 55.21472930908203 - moving ave loss 58.23524102618472
+Finish 75 epoch(es)
+step 151 - loss 54.861000061035156 - moving ave loss 57.89781692966976
+step 152 - loss 55.02161407470703 - moving ave loss 57.610196644173485
+Finish 76 epoch(es)
+step 153 - loss 54.343772888183594 - moving ave loss 57.2835542685745
+step 154 - loss 53.87852096557617 - moving ave loss 56.943050938274666
+Finish 77 epoch(es)
+step 155 - loss 53.848270416259766 - moving ave loss 56.633572886073175
+step 156 - loss 53.42278289794922 - moving ave loss 56.312493887260786
+Finish 78 epoch(es)
+step 157 - loss 53.11548614501953 - moving ave loss 55.99279311303666
+step 158 - loss 52.82225799560547 - moving ave loss 55.67573960129354
+Finish 79 epoch(es)
+step 159 - loss 52.689247131347656 - moving ave loss 55.37709035429896
+step 160 - loss 51.979801177978516 - moving ave loss 55.03736143666692
+Finish 80 epoch(es)
+step 161 - loss 51.75323486328125 - moving ave loss 54.70894877932835
+step 162 - loss 51.84688949584961 - moving ave loss 54.42274285098048
+Finish 81 epoch(es)
+step 163 - loss 51.259803771972656 - moving ave loss 54.1064489430797
+step 164 - loss 50.829593658447266 - moving ave loss 53.778763414616456
+Finish 82 epoch(es)
+step 165 - loss 50.88129425048828 - moving ave loss 53.48901649820364
+step 166 - loss 50.05101776123047 - moving ave loss 53.145216624506325
+Finish 83 epoch(es)
+step 167 - loss 50.415992736816406 - moving ave loss 52.872294235737336
+step 168 - loss 49.35697937011719 - moving ave loss 52.52076274917532
+Finish 84 epoch(es)
+step 169 - loss 49.039756774902344 - moving ave loss 52.17266215174803
+step 170 - loss 49.20981979370117 - moving ave loss 51.876377915943344
+Finish 85 epoch(es)
+step 171 - loss 49.492271423339844 - moving ave loss 51.63796726668299
+step 172 - loss 48.25907516479492 - moving ave loss 51.300078056494186
+Finish 86 epoch(es)
+step 173 - loss 48.23187255859375 - moving ave loss 50.99325750670414
+step 174 - loss 47.579750061035156 - moving ave loss 50.651906762137244
+Finish 87 epoch(es)
+step 175 - loss 47.83335494995117 - moving ave loss 50.370051580918634
+step 176 - loss 47.6583366394043 - moving ave loss 50.098880086767196
+Finish 88 epoch(es)
+step 177 - loss 47.421348571777344 - moving ave loss 49.83112693526821
+step 178 - loss 46.38690185546875 - moving ave loss 49.48670442728827
+Finish 89 epoch(es)
+step 179 - loss 46.21888732910156 - moving ave loss 49.1599227174696
+step 180 - loss 46.12770080566406 - moving ave loss 48.856700526289046
+Finish 90 epoch(es)
+step 181 - loss 45.90058898925781 - moving ave loss 48.561089372585926
+step 182 - loss 45.61747741699219 - moving ave loss 48.26672817702656
+Finish 91 epoch(es)
+step 183 - loss 45.292823791503906 - moving ave loss 47.96933773847429
+step 184 - loss 44.89884948730469 - moving ave loss 47.66228891335733
+Finish 92 epoch(es)
+step 185 - loss 44.734134674072266 - moving ave loss 47.36947348942883
+step 186 - loss 44.04352951049805 - moving ave loss 47.036879091535745
+Finish 93 epoch(es)
+step 187 - loss 43.74140167236328 - moving ave loss 46.7073313496185
+step 188 - loss 43.6710319519043 - moving ave loss 46.40370140984708
+Finish 94 epoch(es)
+step 189 - loss 43.955875396728516 - moving ave loss 46.158918808535226
+step 190 - loss 43.15013122558594 - moving ave loss 45.8580400502403
+Finish 95 epoch(es)
+step 191 - loss 42.70741271972656 - moving ave loss 45.54297731718892
+step 192 - loss 42.554412841796875 - moving ave loss 45.24412086964972
+Finish 96 epoch(es)
+step 193 - loss 42.32025909423828 - moving ave loss 44.95173469210857
+step 194 - loss 41.58063507080078 - moving ave loss 44.6146247299778
+Finish 97 epoch(es)
+step 195 - loss 41.62273025512695 - moving ave loss 44.315435282492714
+step 196 - loss 41.344993591308594 - moving ave loss 44.0183911133743
+Finish 98 epoch(es)
+step 197 - loss 41.577880859375 - moving ave loss 43.774340087974366
+step 198 - loss 41.3453483581543 - moving ave loss 43.53144091499236
+Finish 99 epoch(es)
+step 199 - loss 42.34738540649414 - moving ave loss 43.413035364142544
+step 200 - loss 40.025146484375 - moving ave loss 43.07424647616579
+Finish 100 epoch(es)
+Checkpoint at step 200
+Training finished, exit.

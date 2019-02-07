@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Images</folder>
+	<filename>22.jpg</filename>
+	<path>D:\venv\d\train\Images\22.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>800</width>
+		<height>534</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Pest! (nettle_caterpillar)</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>123</xmin>
+			<ymin>88</ymin>
+			<xmax>709</xmax>
+			<ymax>431</ymax>
+		</bndbox>
+	</object>
+</annotation>
